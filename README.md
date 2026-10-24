@@ -27,3 +27,6 @@
 *(Neuronal Network)*
 - => List of Neurons 
 - => Create Full Mesh
+
+Function that i add in the future:
+- Drawing a NN based on fcnn
