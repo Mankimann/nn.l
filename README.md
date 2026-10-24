@@ -28,5 +28,11 @@
 - => List of Neurons 
 - => Create Full Mesh
 
-Function that i add in the future:
+Functions that i add in the future(maybe):
 - Drawing a NN based on fcnn
+- Screen Manager
+- Creatures with a own mlp
+- 2d tiled map 
+- Weapons
+- Generics (Mother Father, Children, Generic Difference, Evolutionary Algorithms, Mutation Rate)
+- Skill Use
