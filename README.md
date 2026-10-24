@@ -36,3 +36,6 @@ Functions that i add in the future(maybe):
 - Weapons
 - Generics (Mother Father, Children, Generic Difference, Evolutionary Algorithms, Mutation Rate)
 - Skill Use
+
+*Links*
+- Math & Knowledge about the activation function{"https://docs.pytorch.org/docs/2.14/generated/torch.nn.ReLU"} => Sigmoid : switch ReLu with Sigmoid tbf
