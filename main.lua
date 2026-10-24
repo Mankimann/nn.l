@@ -1,18 +1,27 @@
-local neuron = require("neuron")
+local _tl_compat; if (tonumber((_VERSION or ''):match('[%d.]*$')) or 0) < 5.3 then local p, m = pcall(require, 'compat53.module'); if p then _tl_compat = m end end; local string = _tl_compat and _tl_compat.string or string; local InputNeuron = require("inputNeuron")
+local WorkingNeuron = require("workingNeuron")
+local Activationfunction = require("activationsfunctions")
+
+local output = 0
 
 function love.load(_args, _unfiltered)
-
+   InputNeuron:setVal(3)
+   WorkingNeuron:addNeuronConnenction(InputNeuron, 0.5)
+   output = Activationfunction:Sigmoid(WorkingNeuron:getVal())
 end
 
 function love.draw()
+   InputNeuron:draw({ x = 100, y = 100 }, "Input")
+   WorkingNeuron:draw({ x = 250, y = 100 }, "Working")
+   InputNeuron:draw({ x = 400, y = 100 }, "Output")
 
    love.graphics.setColor(1, 1, 1, 1)
-   love.graphics.circle("fill", 100, 100, 25)
-
-
-   love.graphics.setColor(1, 0, 0, 1)
-   love.graphics.circle("fill", 100, 100, 22)
-
+   love.graphics.line(125, 100, 225, 100)
+   love.graphics.line(275, 100, 375, 100)
+   love.graphics.print("in: " .. InputNeuron:getVal(), 80, 140)
+   love.graphics.print("w: 0.5", 155, 80)
+   love.graphics.print("sum: " .. WorkingNeuron:getVal(), 225, 140)
+   love.graphics.print("out: " .. string.format("%.3f", output), 370, 140)
 end
 
 function love.update(dt)

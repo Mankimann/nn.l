@@ -1,5 +1,7 @@
 local Vector2 = require("vec")
 
+
+-- The Neuron class
 local Val: number = 0
 
 local OUTER_RADIUS: number = 25
@@ -30,6 +32,9 @@ val: number
 weight: number
 name: string
 position: Vector2
+setVal: function(self: Neuron, val: number)
+getVal: function(self: Neuron): number
+addNeuronConnenction: function(self: Neuron, neuron: Neuron, weight: number)
 end
 
 
@@ -38,41 +43,23 @@ local function setVal(v: number): number
 end
 
 local function getVal(): number
-   return Val
+   return Neuron.val
 end
 
 local function getValW(): number
    return getVal() * Neuron.weight
 end
 
--- List Of Input Neurons
-local InputNeurons: {Neuron} = {
-   
-}
-
--- List Of Working Neurons
-local WorkingNeurons: {Neuron} = {
-   
-}
-
--- List Of Output Neurons
-local OutputNeurons: {Neuron} = {
-   
-}
-
-function Neuron:new()
-
+function Neuron:new(): Neuron
+   return setmetatable({}, { __index = self })
 end
 
 function Neuron:draw(position: Vector2, t: Type)
    if t == "Input" then
-      print("Input Neuron")
       love.graphics.setColor(InputNeuronInnerColor)
       elseif t == "Working" then
-	 print("Working Neuron")
 	 love.graphics.setColor(WorkingNeuronInnerColor)
       else
-	 print("Output Neuron")
 	 love.graphics.setColor(OutputNeuronInnerColor)
       end
    love.graphics.circle("fill", position.x, position.y, OUTER_RADIUS)
@@ -81,6 +68,5 @@ end
 function Neuron:dispose()
 
    end
-
 
 return Neuron
