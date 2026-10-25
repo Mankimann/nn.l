@@ -1,5 +1,6 @@
 local Neuron = require("ai.neuron")
 local Connection = require("ai.connection")
+local Activationfunction = require("ai.activationsfunctions")
 local WorkingNeuron = Neuron:new()
 local connections: {Neuron:{Connection}} = {}
 
@@ -8,7 +9,7 @@ function WorkingNeuron:getVal(): number
    for _, c in ipairs(connections[self] or {}) do
       sum = sum + c:getVal()
    end
-   return sum
+   return Activationfunction:Sigmoid(sum)
 end
 
 function WorkingNeuron:addNeuronConnenction(neuron: Neuron, weight: number)

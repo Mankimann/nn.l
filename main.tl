@@ -1,11 +1,11 @@
-local InputNeuron        = require("ai.inputNeuron")
-local WorkingNeuron      = require("ai.workingNeuron")
-local Activationfunction = require("ai.activationsfunctions")
+--local InputNeuron        = require("ai.inputNeuron")
+--local WorkingNeuron      = require("ai.workingNeuron")
+--local Activationfunction = require("ai.activationsfunctions")
 local NN                 = require("ai.nn")
 
-local output: number = 0
-local input = InputNeuron:new()
-local working = WorkingNeuron:new()
+--local output: number = 0
+--local input = InputNeuron:new()
+--local working = WorkingNeuron:new()
 
 local width: number = love.graphics.getWidth()
 local height: number = love.graphics.getHeight()
@@ -13,35 +13,36 @@ local canvasSize = {w = width/2, h = height}
 local canvas_app_screen: love.graphics.Canvas
 local canvas_nn_screen: love.graphics.Canvas
 
--- setup the neurons and the weights
-local function loadNeurons()
-   input:setVal(3)
-   working:addNeuronConnenction(input, 0.5)
-   output = Activationfunction:Sigmoid(working:getVal())
-end
-
 function love.load(_args: {string}, _unfiltered: {string})
    -- sets the size of each canvas, neuronal network and the game
    canvas_app_screen = love.graphics.newCanvas(canvasSize.w, canvasSize.h)
    canvas_nn_screen  = love.graphics.newCanvas(canvasSize.w, canvasSize.h)
    -- load all neurons with the weights
-   loadNeurons()
    -- creates a neuronal network with 5 input, 4, working and 2 output neurons 
    NN.create(5, 4, 2)
+   NN.createFullMesh()
+   for i = 1, #NN.InputNeurons do
+      print("Input: Neuron "..i .." " .." Current Value:  "..NN.InputNeurons[i]:getVal())
+      if i == #NN.InputNeurons then
+	 for w = 1, #NN.WorkingNeurons do
+      print("Working: Neuron "..w .." " .." Current Value:  "..NN.WorkingNeurons[w]:getVal())
+   end
+      end
+   end
 end
 
-local function drawNN()
-   input:draw({ x = 100, y = 100 }, "Input")
-   working:draw({ x = 250, y = 100 }, "Working")
-   input:draw({ x = 400, y = 100 }, "Output")
-   love.graphics.setColor(1, 1, 1, 1)
-   love.graphics.line(125, 100,   225, 100)
-   love.graphics.line(275, 100, 375, 100)
-   love.graphics.print("in: " .. input:getVal(), 80, 140)
-   love.graphics.print("w: 0.5", 155, 80)
-   love.graphics.print("sum: " .. working:getVal(), 225, 140)
-   love.graphics.print("out: " .. string.format("%.3f", output), 370, 140)
-end
+--local function drawNN()
+--   input:draw({ x = 100, y = 100 }, "Input")
+--   working:draw({ x = 250, y = 100 }, "Working")
+--   input:draw({ x = 400, y = 100 }, "Output")
+--   love.graphics.setColor(1, 1, 1, 1)
+--   love.graphics.line(125, 100,   225, 100)
+--   love.graphics.line(275, 100, 375, 100)
+--   love.graphics.print("in: " .. input:getVal(), 80, 140)
+--   love.graphics.print("w: 0.5", 155, 80)
+--   love.graphics.print("sum: " .. working:getVal(), 225, 140)
+--   love.graphics.print("out: " .. string.format("%.3f", output), 370, 140)
+--end
 
 
 function love.draw()
@@ -61,10 +62,10 @@ function love.draw()
    --love.graphics.setColor(1, 1, 1, 1)
    -- draw the nn
    NN.draw(canvasSize.w, canvasSize.h)
-   --drawNN()
    love.graphics.draw(canvas_nn_screen, 0, 0)
+   
 end
 
 function love.update(dt: number)
-   
+   NN.update(love.timer.getTime())
 end

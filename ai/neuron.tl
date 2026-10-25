@@ -1,5 +1,4 @@
 -- The Neuron class
-
 local Vector2 = require("ai.vec")
 
 local Val: number = 0
@@ -62,6 +61,12 @@ function Neuron:draw(position: Vector2, t: Neuron.Type)
 	 love.graphics.setColor(OutputNeuronInnerColor)
       end
    love.graphics.circle("fill", position.x, position.y, OUTER_RADIUS)
+   if self:getVal() > 0 then
+      love.graphics.setColor(1, 1, 1, 1)
+   else
+      love.graphics.setColor(0, 0, 0, 1)
+   end
+   love.graphics.circle("fill", position.x, position.y, INNER_RADIUS_STATE * math.abs(self:getVal()))
 end
 
 function Neuron:dispose()
