@@ -1,0 +1,5 @@
+local Neuron = require("neuron")
+
+local Connection = {}
+
+return Connection
