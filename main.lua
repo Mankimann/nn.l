@@ -1,11 +1,4 @@
-
-
-
 local NN = require("ai.nn")
-
-
-
-
 
 local width = love.graphics.getWidth()
 local height = love.graphics.getHeight()
@@ -21,29 +14,17 @@ function love.load(_args, _unfiltered)
 
    NN.create(5, 4, 2)
    NN.createFullMesh()
+
+
    for i = 1, #NN.InputNeurons do
-      print("Input: Neuron " .. i .. " " .. " Current Value:  " .. NN.InputNeurons[i]:getVal())
+      print("Input Neuron: " .. i .. " " .. " Current Value:  " .. NN.InputNeurons[i]:getVal())
       if i == #NN.InputNeurons then
          for w = 1, #NN.WorkingNeurons do
-            print("Working: Neuron " .. w .. " " .. " Current Value:  " .. NN.WorkingNeurons[w]:getVal())
+            print("Working Neuron: " .. w .. " " .. " Current Value:  " .. NN.WorkingNeurons[w]:getVal())
          end
       end
    end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function love.draw()
 
@@ -63,7 +44,9 @@ function love.draw()
 
    NN.draw(canvasSize.w, canvasSize.h)
    love.graphics.draw(canvas_nn_screen, 0, 0)
-
+   for o = 1, #NN.OutputNeurons do
+      print("Output Neuron: " .. o .. " " .. " Current Value:  " .. NN.WorkingNeurons[o]:getVal())
+   end
 end
 
 function love.update(dt)

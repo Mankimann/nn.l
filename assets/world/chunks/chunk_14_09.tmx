@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="1">
+ <properties><property name="chunk_x" type="int" value="14"/><property name="chunk_y" type="int" value="9"/></properties>
+ <tileset firstgid="1" source="../tilesets/world.tsx"/>
+ <tileset firstgid="261" source="../tilesets/regions.tsx"/>
+ <layer id="1" name="deep" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrt2EEKgzAQBdAewZj737VdKIQytGAtTpz3IDRB+Zuh+vHxAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA6/XXWoPF/No2y76tZVttmPN4rQ3XyGsZZteC/RLse7Bfg735X2sd5rH/tmE2++8S3NuDe4/m8d/3bRtmlvHM8Wfz++rBijpXC9ZVeXzvVWvQq37pXJnyPKe/d6SzO1emvGrv4wydK1PeXZ7TmTtW5vPsvWvGzpUpb4Z38906V6a8Kt+55MV5V3z3qt65MuX5Dlb7fPZ/W+eaK++Meetc8+Yd6eM6133yPs1aR7p/3nsv14lqnXWk2nk6Uu08HUmejlQ3TweqfdaRaufpSLXzdCR5OlLdPB2o9llHqp2nI9XO05Hk6Uh183Sg2mcdqXaejlQ7T0eSpyPVzXsCQKcM8A==</data>
+ </layer>
+ <layer id="2" name="ocean" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrt2s1qwzAQReG8ROnC29p6/zdsFg0IV0lU1z+S5jsgkiFwFxmsnpR7uwEAAAAAAAAAAAAAAAD/4+t+0v3Mq9fl57P8dfZ1dcec7Xg5ccZ1+37sYH1S4SyFMxfO3nnYh8d3nLK9PL7jJdtL/tlS+GwufHZVHt7vPK2+wzn7W71+nwrvl8L71vOi3+spu4vXfvYXh0sD5o38rF/lcCPNLe6vxttbdjh5+zvwKA4n733eM58b2eHk/c7jcDHzOFrsmSPFzuNIsfM4kjyOFDePA8WeOVLsPI4UO48jyeNIcfM4UOyZI8XO40ix8ziSPI4UN48DxZ45Uuw8jhQ7jyPJ40j6f5xI/48j6f9xJP0/jqT/x5H0/8z6fxxJ/49z6f9xJP0/zqX/Z9b/41z6f5xL/49z6f9xLv0/s/4f59L/41z6f/L0/+Tp/5n1/+Tp/8nT/5On/ydP/8+s/ydP/0+e/p88/T95+n9m/T95+n/y9P/k6f/J0/8z6//J0/+Tp/8nT/9Pnv6fWf9P3va86X4+C4cj9Z/3bLf5+biV4Ujt5tXs9dVua+BI1+RNB++1Fg50zDw1sNsaONK2vF72W3P/c65y3jTAfmvu/8jOFWHH7+7/CM41Bd7xK0ZwrlZcutf7vyeHm+z2EP9v0eHs+pz7v9X/c9n1ef5/lsN5ptv7/X/m/8Hsur37fy+H82z36/9bHM6zPcb9X+tw9j2u/68dzl0e5/d/8myHxb4BAAAAAAAAAAAAAAAAoE++AQWQnkI=</data>
+ </layer>
+ <layer id="3" name="shallow" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrt2kGOgkAQBVCuM7pgwaZp7n+vYaEJMRXE2ApY7yWVgUD+ptrJX1C6rivzjLep80y3KYtnNXg2Bs+KvFPl1YfM+/UUXNfgegyu5Z0v7/63PpyLGrwzBu+U4B15x8+bFpnu893XxYzBlGCmYGow8o6fpyPlztOR5OlIefN0oNz3OlLuPB0pd56OJE9HypunA+W+15Fy5+lIufN0JHl7d5B+nuvGGXS4pnnf6BjP9vvXbXd58ZzoeOv3n+gg/Rv7beWy4XzohG06yBH23fJ8DL7/e9oZ+pPtu8XZGJJ///fLO2/xP+NXv//rE++8dd/Yo+Ot9e+1zmDv3zsfn5y1/UWdwd7zmIIOb+95+K3nZu8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA7OEfM5x9ZA==</data>
+ </layer>
+ <layer id="4" name="sand" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrtwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB</data>
+ </layer>
+ <layer id="5" name="steppe" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrtwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB</data>
+ </layer>
+ <layer id="6" name="meadow" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrtwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB</data>
+ </layer>
+ <layer id="7" name="forest" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrtwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB</data>
+ </layer>
+ <layer id="8" name="rock" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrtwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB</data>
+ </layer>
+ <layer id="9" name="snow" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrtwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB</data>
+ </layer>
+ <layer id="10" name="Deco" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrtwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB</data>
+ </layer>
+ <layer id="11" name="Above" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrtwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB</data>
+ </layer>
+ <layer id="12" name="Regions" width="128" height="128" visible="0" opacity="0.45">
+  <data encoding="base64" compression="zlib">eNrtwzENAAAMA6DuqH/LFTJI6CVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX1/QEA4YAQ</data>
+ </layer>
+ <objectgroup id="13" name="Places">
+ </objectgroup>
+</map>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="1">
+ <properties><property name="chunk_x" type="int" value="15"/><property name="chunk_y" type="int" value="0"/></properties>
+ <tileset firstgid="1" source="../tilesets/world.tsx"/>
+ <tileset firstgid="261" source="../tilesets/regions.tsx"/>
+ <layer id="1" name="deep" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrt2kGuqkAQRmGW0DT736sMJOmQ0hhU6Ka+k5BHRe8ZPv/BKdM0LetT12den+JOdUdPCZ4leGrw8I3lq8+/3e7tO7Xxtp/V4LM5+IxvHN92l+B9Cd5r8D4H73z9+0rznfbf2vhK83/J/rsl+C7fOD4bKPdtI+X22Uh8NlJen42U22cD5b5tpNw+G4nPRsrrs5Fy+2yg3LeNlNtnI/HZSHl9NlJunw2k/7OR9H82kv7PRtL/2Uj6P7f+z0bS/9lI+j8bSf9nc+n/3Po/m0v/Z3Pp/2wu/Z/Npf9z6/9sLv2fzaX/s7n0fzaX/s+t/+PT//Hp//j0f3z6P7f+j0//x6f/49P/8en/3Po/Pv0fn/6PT//Hp/9z6//49H98+j8+/R+f/s+t/+PT//Hp//j0f3z6P7f+j0//x6f/49P/8en/3Po/Pv0fn/6PT//Hp/9z6//49H98+j8+/R+f/s+t/+PT//Hp//hspGy+PTbQfe9PsJHG932DjTSW79fYSP36zsBG6sN3FTZTf5vsTGyu//hGweY67rsDNtdrXwZsrtzcaWPh2O9/75sL//39v2JzoZ/f/19tLoz7+/9ucwEAAAAAAAAAAAAAAAAAAAAAAAAAAOA8HghVMaM=</data>
+ </layer>
+ <layer id="2" name="ocean" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrt2kFqwzAQBdAcpItiJOX+N6wXNQxCDU3jtrLmPRCJcPgLD7H/QrcbAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMD1vLkF6eb9HtbmlqSZ9THvuq/7vtq+itu05JyPWbfPeZcw837P9f/TJcy0X22walhcb9bH7FqYcwnX2uBaHVzz/J//XX3MqoZ3dv/9PvjeBt9Heczxrq5hLiXMt4Vne+0+2+C3dfDbR3nM18n+cs+5M45z/qpz1TCDfv2kw72Sx/Pz7Xv3s53r7A73Sp75Pn4n/0bnmikvyzxn6lwz5a0y122iTnWl/ez/1W2CjrRy3n/N9EodaeW8M5+/q3aklfO++1/N3JFWztOBcu91pNx5OpI8HSlvno6UO08Hyr3XkXLn6UjydKS8eTpS7jwdKPdeR8qdpyPJ05Hy5ulIufN0oNx7HSl3no4kT0fKm6cjOf+nEzn/pyM5/6cjOf+nIzn/pyM5/2fv/J+O5PyfjrR23gfUV5pp</data>
+ </layer>
+ <layer id="3" name="shallow" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrtwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB</data>
+ </layer>
+ <layer id="4" name="sand" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrtwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB</data>
+ </layer>
+ <layer id="5" name="steppe" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrtwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB</data>
+ </layer>
+ <layer id="6" name="meadow" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrtwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB</data>
+ </layer>
+ <layer id="7" name="forest" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrtwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB</data>
+ </layer>
+ <layer id="8" name="rock" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrtwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB</data>
+ </layer>
+ <layer id="9" name="snow" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrtwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB</data>
+ </layer>
+ <layer id="10" name="Deco" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrtwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB</data>
+ </layer>
+ <layer id="11" name="Above" width="128" height="128">
+  <data encoding="base64" compression="zlib">eNrtwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB</data>
+ </layer>
+ <layer id="12" name="Regions" width="128" height="128" visible="0" opacity="0.45">
+  <data encoding="base64" compression="zlib">eNrtwzENAAAMA6DuqH/LFTJI6CVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX1/QEA4YAQ</data>
+ </layer>
+ <objectgroup id="13" name="Places">
+ </objectgroup>
+</map>
