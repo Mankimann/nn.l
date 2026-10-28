@@ -1,6 +1,6 @@
-# A simple solution of a multilayer perceptron 
+# A simple solution for a multilayer perceptron 
 
-*A throught that just popped into my head*
+*A thought that just popped into my head*
 
 *(Window with management )*
 
@@ -34,7 +34,7 @@ Functions that i add in the future(maybe):
 - Creatures with a own mlp
 - 2d tiled map 
 - Weapons
-- Generics (Mother Father, Children, Generic Difference, Evolutionary Algorithms, Mutation Rate)
+- Generics (Mother, Father, Children, Generic Difference, Evolutionary Algorithms, Mutation Rate)
 - Skill Use
 
 *Links*
