@@ -1,20 +1,18 @@
 local Neuron = require("ai.neuron")
-local Connection = require("ai.connection")
 local Activationfunction = require("ai.activationsfunctions")
 local WorkingNeuron = Neuron:new()
-local connections: {Neuron:{Connection}} = {}
 
-function WorkingNeuron:getVal(): number
-   local sum: number = 0
-   for _, c in ipairs(connections[self] or {}) do
-      sum = sum + c:getVal()
+-- Standard: -1 .. 1, passt zum Zeichnen (weiss = positiv, schwarz = negativ)
+WorkingNeuron.activation = Activationfunction.Tanh
+
+-- Summe der gewichteten Eingaenge + bias durch die Aktivierungsfunktion.
+-- Wird einmal pro update aufgerufen, getVal liefert danach nur noch den gespeicherten Wert.
+function WorkingNeuron:compute()
+   local sum: number = self.bias
+   for _, c in ipairs(self.connections) do
+      sum = sum + c.neuron:getVal() * c.weight
    end
-   return Activationfunction:Sigmoid(sum)
-end
-
-function WorkingNeuron:addNeuronConnenction(neuron: Neuron, weight: number)
-   connections[self] = connections[self] or {}
-   table.insert(connections[self], Connection.new(neuron, weight))
+   self.val = self.activation(sum)
 end
 
 return WorkingNeuron
