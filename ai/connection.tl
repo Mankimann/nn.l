@@ -1,4 +1,6 @@
-local Neuron = require("ai.neuron")
+-- nur Typ-Import, sonst gibt es einen require-Zyklus mit ai.neuron
+-- (deshalb kein getVal hier, das rechnet WorkingNeuron:compute)
+local type Neuron = require("ai.neuron")
 
 local record Connection
 neuron: Neuron
@@ -7,10 +9,6 @@ end
 
 function Connection.new(neuron: Neuron, weight: number): Connection
    return setmetatable({ neuron = neuron, weight = weight }, { __index = Connection })
-end
-
-function Connection:getVal(): number
-   return self.neuron:getVal() * self.weight
 end
 
 return Connection

@@ -1,7 +1,7 @@
 -- The Neuron class
 local Vector2 = require("ai.vec")
+local Connection = require("ai.connection")
 
-local Val: number = 0
 local OUTER_RADIUS: number = 25
 local INNER_RADIUS_STATE: number = 22
 
@@ -27,29 +27,55 @@ end
 id: integer
 layer: number
 val: number
-weight: number
+bias: number
 name: string
 position: Vector2
-setVal: function(self: Neuron, val: number)
-getVal: function(self: Neuron): number
-addNeuronConnenction: function(self: Neuron, neuron: Neuron, weight: number)
-end
-
-
-local function setVal(v: number): number
-   return v
-end
-
-local function getVal(): number
-   return Neuron.val
-end
-
-local function getValW(): number
-   return getVal() * Neuron.weight
+-- eingehende Verbindungen (nur Working/Output Neuronen haben welche)
+connections: {Connection}
+-- Input Neuronen: liefert pro update den neuen Wert (Maus, Zeit, Sensor, ...)
+source: function(): number
+-- Working/Output Neuronen
+activation: function(x: number): number
 end
 
 function Neuron:new(): Neuron
-   return setmetatable({ val = 0 }, { __index = self })
+   return setmetatable({ val = 0, bias = 0, connections = {} }, { __index = self })
+end
+
+function Neuron:setVal(val: number)
+   self.val = val
+end
+
+function Neuron:getVal(): number
+   return self.val
+end
+
+function Neuron:setId(id: integer)
+   self.id = id
+end
+
+function Neuron:getId(): integer
+   return self.id
+end
+
+-- berechnet self.val neu, Basis-Neuron macht nichts
+function Neuron:compute()
+end
+
+function Neuron:addNeuronConnenction(neuron: Neuron, weight: number)
+   table.insert(self.connections, Connection.new(neuron, weight))
+end
+
+function Neuron:removeNeuronConnection(neuron: Neuron)
+   for i = #self.connections, 1, -1 do
+      if self.connections[i].neuron == neuron then
+         table.remove(self.connections, i)
+      end
+   end
+end
+
+function Neuron:clearConnections()
+   self.connections = {}
 end
 
 function Neuron:draw(position: Vector2, t: Neuron.Type)
@@ -66,11 +92,13 @@ function Neuron:draw(position: Vector2, t: Neuron.Type)
    else
       love.graphics.setColor(0, 0, 0, 1)
    end
-   love.graphics.circle("fill", position.x, position.y, INNER_RADIUS_STATE * math.abs(self:getVal()))
+   -- Inputs koennen > 1 sein, Kreis darf nicht groesser als der Rand werden
+   love.graphics.circle("fill", position.x, position.y, INNER_RADIUS_STATE * math.min(1, math.abs(self:getVal())))
 end
 
 function Neuron:dispose()
-
+   self.connections = {}
+   self.source = nil
 end
 
 return Neuron
