@@ -35,9 +35,6 @@ local Neuron = {}
 
 
 
-
-
-
 function Neuron:new()
    return setmetatable({ val = 0, bias = 0, connections = {} }, { __index = self })
 end
@@ -57,7 +54,6 @@ end
 function Neuron:getId()
    return self.id
 end
-
 
 function Neuron:compute()
 end
@@ -92,7 +88,6 @@ function Neuron:draw(position, t)
    else
       love.graphics.setColor(0, 0, 0, 1)
    end
-
    love.graphics.circle("fill", position.x, position.y, INNER_RADIUS_STATE * math.min(1, math.abs(self:getVal())))
 end
 

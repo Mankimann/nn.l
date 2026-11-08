@@ -1,0 +1,7 @@
+
+
+local Creature = {}
+
+
+
+return Creature
