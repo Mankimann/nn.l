@@ -1,0 +1,280 @@
+NOTIZEN: BUTTONS, MENUSCREEN UND AUSBLENDEN
+Projekt: nn.l (LÖVE2D / Teal)
+Stand: 2026-11-07
+
+Alles hier ist ein Vorschlag, im Projekt wurde noch kein Code geändert.
+Button.tl, MenuScreen.tl (in gekürzter Fassung mit 2 Buttons) und das
+Timer-Beispiel bestehen "tl check". In LÖVE gestartet wurde noch nichts.
+
+
+================================================================
+1. DER FEHLER IN MENUSCREEN
+================================================================
+
+content/MenuScreen.tl:91
+
+   local button.now = love.mouse.isDown(1)   -- Syntaxfehler
+
+"local" deklariert nur einfache Variablen, keine Felder wie button.now.
+Richtig wäre button.now = ... ohne "local".
+Weil das ein Syntaxfehler ist, bricht tl dort sofort ab und zeigt die
+Fehler dahinter nicht an.
+
+
+Weitere Fehler in MenuScreen.tl (tl check meldet noch 16):
+
+   Zeile 12, 16, 21  Feld und Parameter heißen y, gemeint ist h,
+                     deshalb ist "h = h" unbekannt
+   Zeile 31-62       newButton gibt es so nicht, es heißt
+                     Button.newButton und erwartet 6 Argumente statt 2
+   Zeile 78, 114     total_height, cursor_y und margin sind nirgends
+                     definiert
+   Zeile 96, 104     Asset_Manager gibt es in diesem Projekt nicht,
+                     stattdessen love.graphics.setColor nehmen
+   Zeile 96          unpack kennt Teal hier nicht, setColor braucht es
+                     aber auch nicht
+   Zeile 107         getHeight() nimmt kein Argument
+
+Ohne Fehlermeldung, aber trotzdem falsch:
+
+   - Dauerklick: button.last wird nie gesetzt, also würde fn() bei
+     gedrückter Maus in jedem Frame ausgelöst.
+   - Datei nicht eingebunden: MenuScreen wird nirgends per require
+     geladen, und es gibt noch keine MenuScreen.lua.
+
+
+Fehler in main.tl:
+
+   - Zeile 79: buttonsize.x existiert nicht, die Tabelle hat nur w und h.
+   - Zeile 73: buttonsize.w und .h werden dort als Position benutzt,
+     nicht als Größe. Die echte Größe steckt in den MagicNumber-Werten.
+   - isButtonClicked() wird nie aufgerufen.
+
+
+================================================================
+2. NEUE DATEI: content/Button.tl
+================================================================
+
+Die Button-Logik liegt an einer Stelle, Menü und main.tl nutzen dieselbe
+Klasse. Das Klicken läuft in update, draw zeichnet nur noch.
+
+----------------------------------------------------------------
+local record Button
+   x: number
+   y: number
+   w: number
+   h: number
+   text: string
+   fn: function()
+   font: love.graphics.Font
+   wasDown: boolean
+end
+
+local mt: metatable<Button> = { __index = Button }
+
+function Button.new(x: number, y: number, w: number, h: number, text: string, fn: function(), font?: love.graphics.Font): Button
+   local self: Button = {
+      x = x, y = y, w = w, h = h,
+      text = text,
+      fn = fn,
+      font = font or love.graphics.getFont(),
+      wasDown = love.mouse.isDown(1),
+   }
+   return setmetatable(self, mt)
+end
+
+function Button:isHot(): boolean
+   local mx, my = love.mouse.getPosition()
+   return mx > self.x and mx < self.x + self.w
+      and my > self.y and my < self.y + self.h
+end
+
+function Button:update()
+   local isDown = love.mouse.isDown(1)
+   if isDown and not self.wasDown and self:isHot() then
+      self.fn()
+   end
+   self.wasDown = isDown
+end
+
+function Button:draw()
+   if self:isHot() then
+      love.graphics.setColor(0.45, 0.57, 0.33, 1.0)
+   else
+      love.graphics.setColor(0.4, 0.4, 0.5, 1.0)
+   end
+   love.graphics.rectangle("fill", self.x, self.y, self.w, self.h)
+
+   love.graphics.setColor(0, 0, 0, 1)
+   local textX = self.x + (self.w - self.font:getWidth(self.text)) * 0.5
+   local textY = self.y + (self.h - self.font:getHeight()) * 0.5
+   love.graphics.print(self.text, self.font, textX, textY)
+   love.graphics.setColor(1, 1, 1, 1)
+end
+
+return Button
+----------------------------------------------------------------
+
+
+================================================================
+3. NEUE FASSUNG: content/MenuScreen.tl
+================================================================
+
+Es bleiben nur noch die Liste und das Layout.
+Die Zahl 100 ist ein Platzhalter. Für ein mittiges Menü muss die
+Gesamthöhe aller Buttons eingerechnet werden.
+
+----------------------------------------------------------------
+local Button = require("content.Button")
+
+local MainMenu = {}
+MainMenu.__index = MainMenu
+
+local BUTTON_HEIGHT: number = 64
+local MARGIN: number = 16
+
+local font: love.graphics.Font = nil
+local buttons: {Button} = {}
+
+local function add(text: string, fn: function())
+   local w = love.graphics.getWidth() / 3
+   local x = (love.graphics.getWidth() - w) * 0.5
+   local y = 100 + #buttons * (BUTTON_HEIGHT + MARGIN)
+   table.insert(buttons, Button.new(x, y, w, BUTTON_HEIGHT, text, fn, font))
+end
+
+function MainMenu.init()
+   font = love.graphics.newFont(32)
+   add("Start", function() print("Starting Evolution App") end)
+   add("Load App", function() print("loading App files") end)
+   add("Settings", function() print("Settings Button") end)
+   add("Credits", function() print("Credits Button") end)
+   add("Exit", function() love.event.quit(0) end)
+end
+
+function MainMenu.update()
+   for _, b in ipairs(buttons) do b:update() end
+end
+
+function MainMenu.draw()
+   for _, b in ipairs(buttons) do b:draw() end
+end
+
+return MainMenu
+----------------------------------------------------------------
+
+
+================================================================
+4. ÄNDERUNGEN IN main.tl
+================================================================
+
+Das ersetzt drawCanvasNNButton, isButtonClicked und buttonsize.
+Dass der Button isNNVisible umschaltet, ist aus dem Code geschlossen.
+Soll er etwas anderes tun, ändert sich nur die Funktion.
+
+----------------------------------------------------------------
+local Button = require("content.Button")
+
+local nnButton: Button
+
+-- in love.load: Position und Größe wie bisher
+nnButton = Button.new(buttonsize.w, buttonsize.h, MagicNumberForTheWin - 10, MagicNumberForTheWin * 0.66, "NN",
+   function() isNNVisible = not isNNVisible end)
+
+-- in love.update:
+nnButton:update()
+
+-- in drawNN, nach dem if/else, damit er immer sichtbar bleibt:
+nnButton:draw()
+----------------------------------------------------------------
+
+
+================================================================
+5. ANIMATION TIMER WIE IN JAVAFX
+================================================================
+
+Variante 1: love.update(dt)
+Entspricht direkt dem AnimationTimer. Läuft wie handle(long now) einmal
+pro Frame. dt sind die Sekunden seit dem letzten Frame, nicht Nanosekunden.
+Man muss nichts starten, die Funktion läuft immer.
+
+----------------------------------------------------------------
+local alpha: number = 1
+local fadeSpeed: number = 1 / 0.3   -- in 0.3 Sekunden ausblenden
+local isFading: boolean = false
+
+function love.update(dt: number)
+   if isFading then
+      alpha = math.max(0, alpha - fadeSpeed * dt)
+      if alpha == 0 then
+         isFading = false
+         isNNVisible = false
+      end
+   end
+end
+----------------------------------------------------------------
+
+
+Variante 2: hump.timer (empfohlen, liegt schon in thirdparty/)
+Entspricht ungefähr FadeTransition: Dauer und Zielwert angeben, am Ende
+läuft ein Callback.
+
+Die "as table"-Casts sind nötig, sonst meldet Teal:
+   can't match a record to a map with non-string keys
+Statt "linear" gehen auch Kurven wie "in-out-cubic".
+
+----------------------------------------------------------------
+local Timer = require("thirdparty.hump.timer")
+
+local fade = { alpha = 1.0 }
+
+local function hideNN()
+   Timer.tween(0.3, fade as table, { alpha = 0 } as table, "linear", function()
+      isNNVisible = false
+   end)
+end
+
+function love.update(dt: number)
+   Timer.update(dt)   -- ohne das passiert nichts
+end
+----------------------------------------------------------------
+
+
+================================================================
+6. DAS ALPHA AUCH ANWENDEN
+================================================================
+
+Der Timer ändert nur eine Zahl, sichtbar wird das erst beim Zeichnen.
+
+NN-Screen in main.tl:
+NN.draw setzt in ai/nn.tl:139-153 seine Farben selbst, ein setColor davor
+bringt also nichts. Außerdem bleibt der Canvas leer, weil er direkt wieder
+abgeschaltet wird (main.tl:89-92) und NN.draw erst danach zeichnet.
+Es muss also in den Canvas gezeichnet werden und der Canvas dann mit Alpha:
+
+----------------------------------------------------------------
+love.graphics.setCanvas(canvas_nn_screen)
+love.graphics.clear(0, 0, 0, 0)
+NN.draw(canvasSize.w, canvasSize.h)
+love.graphics.setCanvas()
+
+love.graphics.setColor(1, 1, 1, fade.alpha)
+love.graphics.draw(canvas_nn_screen, 0, 0)
+love.graphics.setColor(1, 1, 1, 1)
+----------------------------------------------------------------
+
+Button:
+Er bräuchte ein eigenes Feld alpha, das als viertes Argument in seine
+setColor-Aufrufe geht. Solange er ausgeblendet ist, muss update außerdem
+übersprungen werden, sonst bleibt er unsichtbar klickbar.
+
+
+================================================================
+7. OFFENE PUNKTE
+================================================================
+
+   - Button und MenuScreen einbauen, danach tl gen laufen lassen
+   - Entscheiden: Soll der ganze NN-Screen ausgeblendet werden oder nur
+     der Button?
+   - MenuScreen per require einbinden und in love.update/love.draw aufrufen
+   - Menü-Layout mittig ausrichten (Platzhalter 100 ersetzen)

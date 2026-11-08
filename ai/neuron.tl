@@ -30,11 +30,8 @@ val: number
 bias: number
 name: string
 position: Vector2
--- eingehende Verbindungen (nur Working/Output Neuronen haben welche)
 connections: {Connection}
--- Input Neuronen: liefert pro update den neuen Wert (Maus, Zeit, Sensor, ...)
 source: function(): number
--- Working/Output Neuronen
 activation: function(x: number): number
 end
 
@@ -58,7 +55,6 @@ function Neuron:getId(): integer
    return self.id
 end
 
--- berechnet self.val neu, Basis-Neuron macht nichts
 function Neuron:compute()
 end
 
@@ -92,7 +88,6 @@ function Neuron:draw(position: Vector2, t: Neuron.Type)
    else
       love.graphics.setColor(0, 0, 0, 1)
    end
-   -- Inputs koennen > 1 sein, Kreis darf nicht groesser als der Rand werden
    love.graphics.circle("fill", position.x, position.y, INNER_RADIUS_STATE * math.min(1, math.abs(self:getVal())))
 end
 
