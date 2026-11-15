@@ -1,5 +1,6 @@
-local InputNeurons = {}
-local WorkingNeurons = {}
+local Neuron = require("ai.neuron")
+local InputNeurons: {Neuron} = {}
+local WorkingNeurons: {Neuron} = {}
 
 local function createFullMesh()
    for input, k in ipairs(InputNeurons) do

@@ -1,0 +1,18 @@
+				Idees
+
+
+==========================================================================================
+Construct the creature
+
+
+Creature:
+
+	redcord:
+		nn, age, nametag, generic div, mutation rate, heartbar, skill,
+		maxlang of hes feeler(feeler occlusion), learn rate
+
+	can heal, can swim, can fly, can harvest, can mine, can cook, can attack with a extra rate, 
+
+
+nn: --make all function seperate in a CreatureNN.tl
+    --clean up the main

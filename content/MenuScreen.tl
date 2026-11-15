@@ -1,5 +1,5 @@
 local Button = require("content.Button")
-
+local Events = require("content.Events")
 local MainMenu = {}
 MainMenu.__index = MainMenu
 
@@ -18,7 +18,7 @@ end
 
 function MainMenu.init()
    font = love.graphics.newFont(32)
-   add("Start", function() print("Starting Evolution App") end)
+   add("Start", function() Events.emit("startApp") print("Starting Evolution App") end)
    add("Load App", function() print("loading App files") end)
    add("Settings", function() print("Settings Button") end)
    add("Credits", function() print("Credits Button") end)
