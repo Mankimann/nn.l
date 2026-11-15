@@ -1,6 +1,7 @@
 local Neuron = require("ai.neuron")
 local InputNeuron = require("ai.inputNeuron")
 local WorkingNeuron = require("ai.workingNeuron")
+local Activationfunction = require("ai.activationsfunctions")
 -- List Of Input Neurons
 local InputNeurons: {Neuron} = {}
 
@@ -71,6 +72,7 @@ local function create(input: integer, working: integer, output: integer)
       local n = WorkingNeuron:new()
       n:setId(o)
       n.name = "out " .. o
+      n.activation = Activationfunction.Sigmoid
       table.insert(OutputNeurons, n)
    end
 end

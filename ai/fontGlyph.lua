@@ -4,7 +4,7 @@ fontGlyph.__index = fontGlyph
 
 local canvas_nn_glyph_output
 local canvasGlyphHeight = 50
-local canvasGlyphPosition = { x = 10, y = 20 }
+local canvasGlyphPosition = { x = 10.0, y = 20.0 }
 local width = love.graphics.getWidth()
 local alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
@@ -23,9 +23,9 @@ local digits = {
 
 local comma = { { 0 }, { 0 }, { 0 }, { 0 }, { 1 }, { 1 } }
 
-function fontGlyph.init()
-
-   canvas_nn_glyph_output = love.graphics.newCanvas((width / 2) - canvasGlyphPosition.y, canvasGlyphHeight)
+function fontGlyph.init(y)
+   canvasGlyphPosition.y = y
+   canvas_nn_glyph_output = love.graphics.newCanvas((width / 2) - 2 * canvasGlyphPosition.x, canvasGlyphHeight)
 
 end
 
@@ -112,7 +112,7 @@ local function drawPaused()
 end
 
 local function drawOutputs(outputs)
-   local glyph_size = 6
+   local glyph_size = math.min(6, (canvas_nn_glyph_output:getWidth() - 150) / (#outputs * 26 + 1))
    local y = (canvasGlyphHeight - 5 * glyph_size) / 2
    local x = glyph_size
    love.graphics.setColor(0, 0, 0, 1)
